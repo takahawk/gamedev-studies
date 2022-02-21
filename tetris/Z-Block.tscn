@@ -12,18 +12,22 @@ color = "cyan"
 position = Vector2( -32, 96 )
 texture = ExtResource( 2 )
 color = "cyan"
+pos = Vector2( -1, 1 )
 
 [node name="Cell2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 32, 96 )
 texture = ExtResource( 2 )
 color = "cyan"
+pos = Vector2( 0, 1 )
 
 [node name="Cell3" parent="." instance=ExtResource( 1 )]
 position = Vector2( -32, 32 )
 texture = ExtResource( 2 )
 color = "cyan"
+pos = Vector2( -1, 0 )
 
 [node name="Cell4" parent="." instance=ExtResource( 1 )]
 position = Vector2( -96, 32 )
 texture = ExtResource( 2 )
 color = "cyan"
+pos = Vector2( -2, 0 )

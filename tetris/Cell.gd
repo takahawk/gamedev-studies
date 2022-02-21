@@ -1,7 +1,8 @@
 tool
 extends Sprite
 
-export(String, "red", "blue", "green", "yellow", "cyan", "magenta") var color
+export(String, "red", "blue", "green", 
+	   "yellow", "cyan", "magenta") var color
 
 onready var textures = {
 	"red": preload("res://cell_red.png"),
@@ -12,9 +13,14 @@ onready var textures = {
 	"magenta": preload("res://cell_magenta.png")
 	}
 
+signal took_position(pos)
+signal freed_position(pos)
+
+export (Vector2) var pos
 
 func _ready():
 	set_color()
 
 func set_color():
 	texture = textures[color]
+

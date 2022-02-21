@@ -37,15 +37,20 @@ func new_block():
 	var block = get_random_item(blocks).instance()
 	var color = get_random_item(colors)
 	block.color = color
-	var pos = cell_to_xy(Vector2(cols / 2, 0))
-	block.set_position(pos)
 	add_child(block)
-
+	block.connect("took_position", self, "_on_took_position")
+	block.connect("freed_position", self, "_on_freed_position")
+	var pos = Vector2(cols / 2, 0)
+	block.set_game_position(pos)
+	print(game[0])
+	print(game[1])
+	print(game[2])
 
 func get_random_item(arr):
 	return arr[rng.randi_range(0, len(arr) - 1)]
 
-
-func cell_to_xy(cell):
-	return Vector2(cell.x * cell_tex.get_width(),
-				   cell.y * cell_tex.get_height())
+func _on_took_position(pos):
+	game[pos.y][pos.x] = true
+	
+func _on_freed_position(pos):
+	game[pos.y][pos.x] = false
