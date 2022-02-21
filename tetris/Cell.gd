@@ -3,7 +3,7 @@ extends Sprite
 
 export(String, "red", "blue", "green", "yellow", "cyan", "magenta") var color
 
-var textures = {
+onready var textures = {
 	"red": preload("res://cell_red.png"),
 	"blue": preload("res://cell_blue.png"),
 	"green": preload("res://cell_green.png"),
