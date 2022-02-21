@@ -1,8 +1,8 @@
 tool
 extends Node2D
 
-export (int) var cols
-export (int) var rows
+export (int, 4, 100) var cols
+export (int, 4, 100) var rows
 
 onready var cell_tex = preload("res://cell_red.png")
 onready var blocks = [
@@ -11,14 +11,36 @@ onready var blocks = [
 	preload("res://Z-Block.tscn"),
 	preload("res://T-Block.tscn")
 ]
+var colors = ["red", "green", "blue", "cyan", "yellow", "magenta"]
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
+	rng.randomize()
 	new_game()
+	new_block()
 
-
+	
 func new_game():
 	var width = cell_tex.get_width() * cols
 	var height = cell_tex.get_height() * rows
-	print(width)
-	print(height)
 	$Background.set_size(Vector2(width, height))
+
+
+func new_block():
+	var block = get_random_item(blocks).instance()
+	var color = get_random_item(colors)
+	block.color = color
+	var pos = cell_to_xy(Vector2(cols / 2 - 1, 0))
+	pos += block.get_rect().size / 2
+	block.set_position(pos)
+	add_child(block)
+
+
+func get_random_item(arr):
+	return arr[rng.randi_range(0, len(arr) - 1)]
+
+
+func cell_to_xy(cell):
+	return Vector2(cell.x * cell_tex.get_width(),
+				   cell.y * cell_tex.get_height())
