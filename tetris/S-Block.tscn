@@ -9,21 +9,21 @@ script = ExtResource( 2 )
 color = "cyan"
 
 [node name="Cell1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 32 )
+position = Vector2( 32, 96 )
 texture = ExtResource( 3 )
 color = "cyan"
 
 [node name="Cell2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -64, 32 )
+position = Vector2( -32, 96 )
 texture = ExtResource( 3 )
 color = "cyan"
 
 [node name="Cell3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -32 )
+position = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 color = "cyan"
 
 [node name="Cell4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, -32 )
+position = Vector2( 96, 32 )
 texture = ExtResource( 3 )
 color = "cyan"

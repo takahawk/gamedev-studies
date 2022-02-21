@@ -14,6 +14,7 @@ onready var blocks = [
 var colors = ["red", "green", "blue", "cyan", "yellow", "magenta"]
 
 var rng = RandomNumberGenerator.new()
+var game = [[]]
 
 func _ready():
 	rng.randomize()
@@ -22,6 +23,11 @@ func _ready():
 
 	
 func new_game():
+	game = []
+	game.resize(rows)
+	for i in range(len(game)):
+		game[i] = []
+		game[i].resize(cols)
 	var width = cell_tex.get_width() * cols
 	var height = cell_tex.get_height() * rows
 	$Background.set_size(Vector2(width, height))
@@ -31,8 +37,7 @@ func new_block():
 	var block = get_random_item(blocks).instance()
 	var color = get_random_item(colors)
 	block.color = color
-	var pos = cell_to_xy(Vector2(cols / 2 - 1, 0))
-	pos += block.get_rect().size / 2
+	var pos = cell_to_xy(Vector2(cols / 2, 0))
 	block.set_position(pos)
 	add_child(block)
 
