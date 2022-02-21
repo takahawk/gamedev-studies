@@ -14,4 +14,7 @@ var textures = {
 
 
 func _ready():
+	set_color()
+
+func set_color():
 	texture = textures[color]

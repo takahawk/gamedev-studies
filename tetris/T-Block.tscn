@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cell.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cell_green.png" type="Texture" id=2]
+[ext_resource path="res://Block.gd" type="Script" id=3]
+
+[node name="Block" type="Node2D"]
+script = ExtResource( 3 )
+color = "green"
+
+[node name="Cell1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 32 )
+texture = ExtResource( 2 )
+color = "green"
+
+[node name="Cell2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, -32 )
+texture = ExtResource( 2 )
+color = "green"
+
+[node name="Cell3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -32 )
+texture = ExtResource( 2 )
+color = "green"
+
+[node name="Cell4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -64, -32 )
+texture = ExtResource( 2 )
+color = "green"
