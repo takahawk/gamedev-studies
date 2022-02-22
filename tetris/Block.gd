@@ -6,8 +6,7 @@ export(String, "red", "blue", "green",
 
 onready var cell_tex = preload("res://cell_red.png")
 
-signal took_position(pos)
-signal freed_position(pos)
+signal is_landed()
 
 var game
 
@@ -15,15 +14,12 @@ func _ready():
 	for cell in get_children():
 		cell.color = color
 		cell.set_color()
-		cell.connect("took_position", self, "_on_took_position")
-		cell.connect("freed_position", self, "_on_freed_position")
-
+		
 
 func set_game_position(dpos):
 	set_position(cell_to_xy(dpos))
 	for cell in get_children():
 		cell.pos += dpos
-		emit_signal("took_position", cell.pos)
 
 
 func cell_to_xy(cell):
@@ -49,6 +45,12 @@ func can_move_right():
 	for cell in get_children():
 		result = result && cell.can_move_right()
 	return result
+	
+func can_move_down():
+	var result = true
+	for cell in get_children():
+		result = result && cell.can_move_down()
+	return result
 
 	
 func move_left():
@@ -62,9 +64,9 @@ func move_right():
 		for cell in get_children():
 			cell.move_right()
 
-
-func _on_took_position(pos):
-	emit_signal("took_position", pos)
-	
-func _on_freed_position(pos):
-	emit_signal("freed_position", pos)
+func move_down():
+	if can_move_down():
+		for cell in get_children():
+			cell.move_down()
+	else:
+		emit_signal("is_landed")
