@@ -15,12 +15,18 @@ var colors = ["red", "green", "blue", "cyan", "yellow", "magenta"]
 
 var rng = RandomNumberGenerator.new()
 var game = [[]]
+var block
 
 func _ready():
 	rng.randomize()
 	new_game()
 	new_block()
 
+func _process(deltaTime):
+	if Input.is_action_just_pressed("ui_left"):
+		block.move_left()
+	if Input.is_action_just_pressed("ui_right"):
+		block.move_right()
 	
 func new_game():
 	game = []
@@ -34,7 +40,7 @@ func new_game():
 
 
 func new_block():
-	var block = get_random_item(blocks).instance()
+	block = get_random_item(blocks).instance()
 	var color = get_random_item(colors)
 	block.color = color
 	add_child(block)
@@ -42,15 +48,16 @@ func new_block():
 	block.connect("freed_position", self, "_on_freed_position")
 	var pos = Vector2(cols / 2, 0)
 	block.set_game_position(pos)
-	print(game[0])
-	print(game[1])
-	print(game[2])
+	block.set_game(game)
 
 func get_random_item(arr):
 	return arr[rng.randi_range(0, len(arr) - 1)]
 
 func _on_took_position(pos):
-	game[pos.y][pos.x] = true
+	if not game[pos.y][pos.x]:
+		game[pos.y][pos.x] = 0
+	game[pos.y][pos.x] += 1
 	
 func _on_freed_position(pos):
-	game[pos.y][pos.x] = false
+	if game[pos.y][pos.x]:
+		game[pos.y][pos.x] -= 1
