@@ -10,30 +10,30 @@ const ONE_SECOND_DISTANCE = 120
 const PRESSED_KEY_TIMEOUT = 0.15
 const PRESSED_KEY_DOWN_TIMEOUT = 0.05
 
-onready var cell_tex = preload("res://cell_red.png")
-onready var blocks = [
+onready var cell_tex: Texture = preload("res://cell_red.png")
+onready var blocks: Array = [
 	preload("res://O-Block.tscn"),
 	preload("res://S-Block.tscn"),
 	preload("res://Z-Block.tscn"),
 	preload("res://T-Block.tscn")
 ]
-var colors = ["red", "green", "blue", "cyan", "yellow", "magenta"]
+var colors: Array = ["red", "green", "blue", "cyan", "yellow", "magenta"]
 
-var rng = RandomNumberGenerator.new()
-var game = [[]]
-var block
-var time_to_tick = 0
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var game: Array = [[]]
+var block: Block
+var time_to_tick: float = 0
 
-var left_timeout
-var right_timeout
-var down_timeout
+var left_timeout: float
+var right_timeout: float
+var down_timeout: float
 
 func _ready():
 	rng.randomize()
 	new_game()
 	new_block()
 
-func _process(deltaTime):
+func _process(deltaTime: float) -> void:
 	if Engine.editor_hint:
 		return
 	if Input.is_action_just_pressed("ui_left"):
@@ -69,7 +69,7 @@ func _process(deltaTime):
 		time_to_tick = ONE_SECOND_DISTANCE / speed
 		block.move_down()
 	
-func new_game():
+func new_game() -> void:
 	game = []
 	game.resize(rows)
 	for i in range(len(game)):
@@ -80,7 +80,7 @@ func new_game():
 	$Background.set_size(Vector2(width, height))
 
 
-func new_block():
+func new_block() -> void:
 	block = get_random_item(blocks).instance()
 	var color = get_random_item(colors)
 	block.color = color
@@ -92,11 +92,11 @@ func new_block():
 	
 	time_to_tick = ONE_SECOND_DISTANCE / speed
 
-func get_random_item(arr):
+func get_random_item(arr: Array) -> Object:
 	return arr[rng.randi_range(0, len(arr) - 1)]
 
 
-func _on_landed():
+func _on_landed() -> void:
 	for cell in block.get_children():
 		var position = cell.position
 		block.remove_child(cell)
