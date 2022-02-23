@@ -7,6 +7,8 @@ export (float, 1, 2000) var speed
 
 # we assume that speed=120 means block ticks every second
 const ONE_SECOND_DISTANCE = 120
+const PRESSED_KEY_TIMEOUT = 0.15
+const PRESSED_KEY_DOWN_TIMEOUT = 0.05
 
 onready var cell_tex = preload("res://cell_red.png")
 onready var blocks = [
@@ -22,6 +24,10 @@ var game = [[]]
 var block
 var time_to_tick = 0
 
+var left_timeout
+var right_timeout
+var down_timeout
+
 func _ready():
 	rng.randomize()
 	new_game()
@@ -32,8 +38,31 @@ func _process(deltaTime):
 		return
 	if Input.is_action_just_pressed("ui_left"):
 		block.move_left()
+	elif Input.is_action_pressed("ui_left"):
+		if left_timeout > PRESSED_KEY_TIMEOUT:
+			block.move_left()
+			left_timeout = 0
+		left_timeout += deltaTime
+	else:
+		left_timeout = 0
+		
 	if Input.is_action_just_pressed("ui_right"):
 		block.move_right()
+	elif Input.is_action_pressed("ui_right"):
+		if right_timeout > PRESSED_KEY_TIMEOUT:
+			block.move_right()
+			right_timeout = 0
+		right_timeout += deltaTime
+	else:
+		right_timeout = 0
+	
+	if Input.is_action_pressed("ui_down"):
+		if down_timeout > PRESSED_KEY_DOWN_TIMEOUT:
+			block.move_down()
+			down_timeout = 0
+		down_timeout += deltaTime
+	else:
+		down_timeout = 0
 	
 	time_to_tick -= deltaTime
 	if time_to_tick < 0:
