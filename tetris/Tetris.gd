@@ -36,9 +36,9 @@ func _ready():
 func _process(deltaTime: float) -> void:
 	if Engine.editor_hint:
 		return
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_just_pressed("tetris_left"):
 		block.move_left()
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("tetris_left"):
 		if left_timeout > PRESSED_KEY_TIMEOUT:
 			block.move_left()
 			left_timeout = 0
@@ -46,9 +46,9 @@ func _process(deltaTime: float) -> void:
 	else:
 		left_timeout = 0
 		
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_pressed("tetris_right"):
 		block.move_right()
-	elif Input.is_action_pressed("ui_right"):
+	elif Input.is_action_pressed("tetris_right"):
 		if right_timeout > PRESSED_KEY_TIMEOUT:
 			block.move_right()
 			right_timeout = 0
@@ -56,13 +56,18 @@ func _process(deltaTime: float) -> void:
 	else:
 		right_timeout = 0
 	
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("tetris_down"):
 		if down_timeout > PRESSED_KEY_DOWN_TIMEOUT:
 			block.move_down()
 			down_timeout = 0
 		down_timeout += deltaTime
 	else:
 		down_timeout = 0
+	
+	if Input.is_action_just_pressed("tetris_drop"):
+		var current_block := block
+		while current_block == block:
+			block.move_down()
 	
 	time_to_tick -= deltaTime
 	if time_to_tick < 0:
