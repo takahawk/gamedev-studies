@@ -35,6 +35,7 @@ func can_move_right() -> bool:
 func can_move_down() -> bool:
 	return pos.y + 1 < len(game) and not game[pos.y + 1][pos.x]
 
+
 func move_right() -> void:
 	assert(can_move_right())
 	pos.x += 1
@@ -50,3 +51,10 @@ func move_down() -> void:
 	assert(can_move_down())
 	pos.y += 1
 	position.y += texture.get_height()
+
+func move_to(new_pos: Vector2) -> void:
+	var dx: int = new_pos.x - pos.x
+	var dy: int = new_pos.y - pos.y
+	pos = new_pos
+	position.x += texture.get_width() * dx
+	position.y += texture.get_height() * dy

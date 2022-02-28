@@ -69,6 +69,9 @@ func _process(deltaTime: float) -> void:
 		while current_block == block:
 			block.move_down()
 	
+	if Input.is_action_just_pressed("tetris_rotate"):
+		block.block_rotate()
+	
 	time_to_tick -= deltaTime
 	if time_to_tick < 0:
 		time_to_tick = ONE_SECOND_DISTANCE / speed

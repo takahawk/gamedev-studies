@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 color = "magenta"
 
 [node name="Cell1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 32, 96 )
+position = Vector2( -32, 32 )
 texture = ExtResource( 3 )
 color = "magenta"
 pos = Vector2( 0, 1 )
@@ -21,12 +21,12 @@ color = "magenta"
 pos = Vector2( -1, 1 )
 
 [node name="Cell3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 32, 32 )
+position = Vector2( 32, 96 )
 texture = ExtResource( 3 )
 color = "magenta"
 
 [node name="Cell4" parent="." instance=ExtResource( 1 )]
-position = Vector2( -32, 32 )
+position = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 color = "magenta"
 pos = Vector2( -1, 0 )
