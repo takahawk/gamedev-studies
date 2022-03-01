@@ -27,32 +27,34 @@ func set_game(game: Array) -> void:
 	self.game = game
 
 func can_move_left() -> bool:
-	return pos.x - 1 >= 0 and not game[pos.y][pos.x - 1]
+	return can_move_to(pos + Vector2(-1, 0))
 	
 func can_move_right() -> bool:
-	return pos.x + 1 < len(game[0]) and not game[pos.y][pos.x + 1]
-
+	return can_move_to(pos + Vector2(1, 0))
+	
 func can_move_down() -> bool:
-	return pos.y + 1 < len(game) and not game[pos.y + 1][pos.x]
-
+	return can_move_to(pos + Vector2(0, 1))
 
 func move_right() -> void:
-	assert(can_move_right())
-	pos.x += 1
-	position.x += texture.get_width()
-
+	move_to(pos + Vector2(1, 0))
 	
 func move_left() -> void:
-	assert(can_move_left())
-	pos.x -= 1
-	position.x -= texture.get_width()
+	move_to(pos + Vector2(-1, 0))
 
 func move_down() -> void:
-	assert(can_move_down())
-	pos.y += 1
-	position.y += texture.get_height()
+	move_to(pos + Vector2(0, 1))
+	
+func can_move_to(new_pos: Vector2) -> bool:
+	if new_pos.x < 0 or new_pos.x >= len(game[0]):
+		return false
+	if new_pos.y < 0 or new_pos.y >= len(game):
+		return false
+	if game[new_pos.y][new_pos.x]:
+		return false
+	return true
 
 func move_to(new_pos: Vector2) -> void:
+	assert(can_move_to(new_pos))
 	var dx: int = new_pos.x - pos.x
 	var dy: int = new_pos.y - pos.y
 	pos = new_pos
