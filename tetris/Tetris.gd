@@ -15,7 +15,8 @@ onready var blocks: Array = [
 	preload("res://O-Block.tscn"),
 	preload("res://S-Block.tscn"),
 	preload("res://Z-Block.tscn"),
-	preload("res://T-Block.tscn")
+	preload("res://T-Block.tscn"),
+	preload("res://I-Block.tscn")
 ]
 var colors: Array = ["red", "green", "blue", "cyan", "yellow", "magenta"]
 
