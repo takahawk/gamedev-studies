@@ -60,3 +60,7 @@ func move_to(new_pos: Vector2) -> void:
 	pos = new_pos
 	position.x += texture.get_width() * dx
 	position.y += texture.get_height() * dy
+
+
+func is_position_conflicting() -> bool:
+	return game[pos.y][pos.x]

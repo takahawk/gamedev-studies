@@ -10,6 +10,8 @@ const ONE_SECOND_DISTANCE = 120
 const PRESSED_KEY_TIMEOUT = 0.15
 const PRESSED_KEY_DOWN_TIMEOUT = 0.05
 
+signal game_is_over
+
 onready var cell_tex: Texture = preload("res://cell_red.png")
 onready var blocks: Array = [
 	preload("res://O-Block.tscn"),
@@ -23,6 +25,7 @@ var colors: Array = ["red", "green", "blue", "cyan", "yellow", "magenta"]
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var game: Array = [[]]
 var block: Block
+var game_is_over: bool = false
 var time_to_tick: float = 0
 
 var left_timeout: float
@@ -35,6 +38,8 @@ func _ready():
 	new_block()
 
 func _process(deltaTime: float) -> void:
+	if game_is_over:
+		return
 	if Engine.editor_hint:
 		return
 	if Input.is_action_just_pressed("tetris_left"):
@@ -98,6 +103,10 @@ func new_block() -> void:
 	var pos = Vector2(cols / 2, 0)
 	block.set_game_position(pos)
 	block.set_game(game)
+	if block.has_conflicting_positions():
+		game_is_over = true
+		emit_signal("game_is_over")
+		return
 	
 	time_to_tick = ONE_SECOND_DISTANCE / speed
 

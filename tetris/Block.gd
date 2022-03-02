@@ -89,3 +89,9 @@ func block_rotate() -> void:
 	rotation_phase += 1
 	if rotation_phase >= len(rotations):
 		rotation_phase = 0
+
+func has_conflicting_positions() -> bool:
+	for cell in cells:
+		if cell.is_position_conflicting():
+			return true
+	return false
