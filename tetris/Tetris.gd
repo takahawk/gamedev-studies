@@ -11,6 +11,7 @@ const PRESSED_KEY_TIMEOUT = 0.15
 const PRESSED_KEY_DOWN_TIMEOUT = 0.05
 
 signal game_is_over
+signal lines_destroyed(count)
 
 onready var cell_tex: Texture = preload("res://cell_red.png")
 onready var blocks: Array = [
@@ -113,6 +114,34 @@ func new_block() -> void:
 func get_random_item(arr: Array) -> Object:
 	return arr[rng.randi_range(0, len(arr) - 1)]
 
+func check_lines() -> void:
+	var lines_to_check := 4
+	var current_line := len(game) - 1
+	var lines_destroyed := 0
+	while lines_to_check != 0:
+		var line_is_full := true
+		for cell in game[current_line]:
+			if not cell:
+				line_is_full = false
+				break
+		if line_is_full:
+			for cell in game[current_line]:
+				cell.queue_free()
+			var empty_row = []
+			empty_row.resize(len(game[current_line]))
+			for i in range(current_line, 0, -1):
+				game[i] = empty_row
+				for cell in game[i - 1]:
+					if cell:
+						cell.move_down()
+				game[i] = game[i - 1]
+			for i in range(len(game[0])):
+				game[0][i] = null
+			lines_destroyed += 1
+		else:
+			current_line -= 1
+		lines_to_check -= 1
+	emit_signal("lines_destroyed", lines_destroyed)
 
 func _on_landed() -> void:
 	for cell in block.get_children():
@@ -122,4 +151,5 @@ func _on_landed() -> void:
 		cell.set_position(position + block.position)
 		game[cell.pos.y][cell.pos.x] = cell
 	block.queue_free()
+	check_lines()
 	new_block()
