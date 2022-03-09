@@ -43,7 +43,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BitmapFontMaker/plugin.cfg", "res://addons/bitmap_font_creator/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BitmapFontMaker/plugin.cfg" )
 
 [input]
 

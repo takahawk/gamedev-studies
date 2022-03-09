@@ -1,13 +1,60 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://TetrisFont.tres" type="BitmapFont" id=1]
+[ext_resource path="res://MenuItem.gd" type="Script" id=2]
+[ext_resource path="res://MainMenu.gd" type="Script" id=3]
 
-[node name="Control" type="Control"]
+[node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 280, 376 )
+mouse_filter = 1
+script = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="."]
-margin_right = 336.0
-margin_bottom = 80.0
+[node name="Bg" type="ColorRect" parent="."]
+margin_right = 480.0
+margin_bottom = 800.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="Play" type="Label" parent="."]
+margin_left = 160.0
+margin_top = 216.0
+margin_right = 352.0
+margin_bottom = 296.0
+rect_pivot_offset = Vector2( 128, 0 )
+mouse_filter = 0
+custom_colors/font_color = Color( 0.403922, 1, 0.0705882, 1 )
 custom_fonts/font = ExtResource( 1 )
-text = "HELLO WORLD"
+text = "PLAY"
+script = ExtResource( 2 )
+on_hover_color = Color( 0.890196, 0, 0.898039, 1 )
+on_click_color = Color( 0, 0.992157, 0.435294, 1 )
+
+[node name="Scores" type="Label" parent="."]
+margin_left = 112.0
+margin_top = 344.0
+margin_right = 400.0
+margin_bottom = 424.0
+rect_pivot_offset = Vector2( 128, 0 )
+mouse_filter = 0
+custom_colors/font_color = Color( 0.403922, 1, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "SCORES"
+script = ExtResource( 2 )
+on_hover_color = Color( 0.890196, 0, 0.898039, 1 )
+on_click_color = Color( 0, 0.992157, 0.435294, 1 )
+
+[node name="Exit" type="Label" parent="."]
+margin_left = 160.0
+margin_top = 472.0
+margin_right = 352.0
+margin_bottom = 552.0
+rect_pivot_offset = Vector2( 128, 0 )
+mouse_filter = 0
+custom_colors/font_color = Color( 0.403922, 1, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "EXIT"
+script = ExtResource( 2 )
+on_hover_color = Color( 0.890196, 0, 0.898039, 1 )
+on_click_color = Color( 0, 0.992157, 0.435294, 1 )
