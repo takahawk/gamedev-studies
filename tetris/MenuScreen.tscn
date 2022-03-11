@@ -58,3 +58,6 @@ text = "EXIT"
 script = ExtResource( 2 )
 on_hover_color = Color( 0.890196, 0, 0.898039, 1 )
 on_click_color = Color( 0, 0.992157, 0.435294, 1 )
+
+[connection signal="unclicked" from="Play" to="." method="_on_Play_unclicked"]
+[connection signal="unclicked" from="Exit" to="." method="_on_Exit_unclicked"]

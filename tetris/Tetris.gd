@@ -141,7 +141,8 @@ func check_lines() -> void:
 		else:
 			current_line -= 1
 		lines_to_check -= 1
-	emit_signal("lines_destroyed", lines_destroyed)
+	if lines_destroyed != 0:
+		emit_signal("lines_destroyed", lines_destroyed)
 
 func _on_landed() -> void:
 	for cell in block.get_children():
