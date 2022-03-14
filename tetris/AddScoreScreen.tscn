@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tetris_font.tres" type="BitmapFont" id=1]
+
+[node name="AddScoreScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnterYourName" type="Node2D" parent="."]
+position = Vector2( 63, 29 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Label" type="Label" parent="EnterYourName"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "ENTER YOUR NAME"
+
+[node name="Name" type="Node2D" parent="."]
+position = Vector2( 90, 103 )
+
+[node name="TextEdit" type="TextEdit" parent="Name"]
+margin_left = 7.0
+margin_top = -7.0
+margin_right = 310.0
+margin_bottom = 51.0
+custom_colors/background_color = Color( 0, 0, 0, 0 )
+custom_fonts/font = ExtResource( 1 )
